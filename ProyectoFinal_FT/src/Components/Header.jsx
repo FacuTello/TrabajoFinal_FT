@@ -7,34 +7,40 @@ import Navbar from 'react-bootstrap/Navbar';
 function Header()
 {
     return(
-    <Navbar bg="primary" data-bs-theme="dark">
-        <Container>
-          <Navbar.Brand href="#home">
-            <img
+      <Navbar bg="primary" data-bs-theme="dark">
+      <Container>
+        <Navbar.Brand href="#home">
+          <img
             src="./public/logo.png"
             width="100"
             height="100"
             className="d-inline-block align-top"
             alt="Compumundo Hipermegared"
-            />
-          </Navbar.Brand>
-          <Nav className="me-auto">
-            <Nav.Link href="#home">Productos</Nav.Link>
-            <Nav.Link href="#features">Ofertas</Nav.Link>
-            <Nav.Link href="#pricing">Quienes Somos</Nav.Link>
-            <Nav.Link className='administracion' href="#Administration">Administracion</Nav.Link>
-          </Nav>
-        </Container>
+          />
+        </Navbar.Brand>
+        <div className="d-flex w-100 align-items-center">
+          <div className="d-flex">
+            <Nav.Link href="#home" className="me-3 fs-5 fst-italic">Productos</Nav.Link>
+            <Nav.Link href="#features" className="me-3 fs-5 fst-italic">Contacto</Nav.Link>
+            <Nav.Link href="#pricing" className='fs-5 fst-italic'>Quienes Somos</Nav.Link>
+          </div>
+          <div className="d-flex ms-auto">
+            <Nav.Link href="#Administration" className="me-4 fs-5 fst-italic">Administración</Nav.Link>
+            <Nav.Link href="#cart">
+              <img
+                src="/Carrito.png"
+                alt="Carrito de compras"
+                width="30"
+                height="30"
+              />
+            </Nav.Link>
+          </div>
+        </div>
+      </Container>
     </Navbar>
+    
         )
 }
 
 export default Header;
 
-<img
-                    src="./public/logo.png"
-                    width="100"
-                    height="100"
-                    className="d-inline-block align-top"
-                    alt="Compumundo Hipermegared"
-                    />
