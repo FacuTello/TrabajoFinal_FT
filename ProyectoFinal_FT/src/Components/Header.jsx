@@ -20,9 +20,10 @@ function Header()
         </Navbar.Brand>
         <div className="d-flex w-100 align-items-center">
           <div className="d-flex">
-            <Nav.Link href="#home" className="me-3 fs-5 fst-italic">Productos</Nav.Link>
-            <Nav.Link href="#features" className="me-3 fs-5 fst-italic">Contacto</Nav.Link>
-            <Nav.Link href="#pricing" className='fs-5 fst-italic'>Quienes Somos</Nav.Link>
+            <Nav.Link href="#home" className="me-3 fs-5 fst-italic">Joyeria</Nav.Link>
+            <Nav.Link href="#features" className="me-3 fs-5 fst-italic">Ropa Masculina</Nav.Link>
+            <Nav.Link href="#pricing" className='me-3 fs-5 fst-italic'>Ropa Femenina</Nav.Link>
+            <Nav.Link href="#pricing" className='fs-5 fst-italic'>Electronica</Nav.Link>
           </div>
           <div className="d-flex ms-auto">
             <Nav.Link href="#Administration" className="me-4 fs-5 fst-italic">Administración</Nav.Link>

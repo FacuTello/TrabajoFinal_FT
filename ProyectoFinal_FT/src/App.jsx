@@ -1,6 +1,6 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
-import Header from "./Components/Header"
-import Productos from './Components/Productos';
+import Header from './Components/Header';
+import Joyeria from './Components/Joyeria';
 
 
 function App() {
@@ -9,7 +9,7 @@ function App() {
   return (
     <div>
       <Header/>
-      <Productos/>
+      <Joyeria/>
     </div>
   )
 }
