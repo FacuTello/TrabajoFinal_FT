@@ -4,7 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 
 
-function Joyeria()
+function Electronica()
 {
     const[productos, setProductos]=useState([]);
     const[loading, setLoading]=useState(true);
@@ -14,7 +14,7 @@ function Joyeria()
         fetch('https://fakestoreapi.com/products')
         .then(res=> res.json())
         .then(data => {
-            const filtrados = data.filter(producto => producto.category === 'jewelery');
+            const filtrados = data.filter(producto => producto.category === 'electronics');
             setProductos(filtrados);
             setLoading(false);
         })
@@ -27,7 +27,7 @@ function Joyeria()
     
     return (
         <Container>
-            <h1 className="text-center mt-4 mb-4">Productos de Joyeria</h1>
+            <h1 className="text-center mt-4 mb-4">Productos de Electronica</h1>
             <Row className="justify-content-center">
                 {productos.map(producto=>(    
                     <Col md={4} className="mt-4" key={producto.id}>
@@ -52,4 +52,4 @@ function Joyeria()
     )
 }
 
-export default Joyeria;
+export default Electronica;
