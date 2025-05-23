@@ -5,6 +5,7 @@ import RopaMasculina from './Components/RopaMasculina';
 import RopaFemenina from './Components/RopaFemenina';
 import Electronica from './Components/Electronica';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import './App.css';
 
 
 function App() {

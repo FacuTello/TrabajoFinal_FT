@@ -1,0 +1,18 @@
+.texto{
+    font-family: "Lilita One", sans-serif;
+    font-weight: 400;
+    font-style: normal;
+}
+
+.precio{
+    font-size: 30px;
+    color : rgb(13, 110, 253)
+}
+
+body{
+    background-color: rgb(206, 212, 218);
+}
+
+.card{
+    background-color: rgb(206, 212, 218);
+}

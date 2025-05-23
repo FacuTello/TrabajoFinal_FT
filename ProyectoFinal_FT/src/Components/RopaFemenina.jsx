@@ -27,12 +27,12 @@ function RopaFemenina()
     
     return (
       <Container>
-        <h1 className="text-center mt-4 mb-4">Ropa Femenina</h1>
+        <h1 className="text-center mt-4 mb-4 texto">Ropa Femenina</h1>
         <Row className="justify-content-center">
           {productos.map((producto) => (
             <Col md={4} className="mt-4" key={producto.id}>
               <Card
-                className="d-flex flex-column text-center rounded"
+                className="d-flex flex-column text-center rounded card"
                 style={{
                   width: "300px",
                   height: "460px",
@@ -62,10 +62,10 @@ function RopaFemenina()
                     </Card.Text>
                   </div>
                   <div
-                    className="d-flex justify-content-around align-items-end mt-auto"
+                    className="d-flex justify-content-around align-items-end mt-auto align-items-baseline"
                     style={{ height: "80px" }}
                   >
-                    <Card.Text>
+                    <Card.Text className="precio">
                       <strong>${producto.price}</strong>
                     </Card.Text>
                     <Button variant="primary">Comprar</Button>
