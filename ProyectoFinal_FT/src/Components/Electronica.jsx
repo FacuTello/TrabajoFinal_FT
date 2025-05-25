@@ -1,12 +1,18 @@
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-
+import Swal from 'sweetalert2';
 
 function Electronica()
 {
+    function comprarModal(){
+        Swal.fire({
+            title: "Compra Realizada",
+            text: "Puedes ver tu compra en el carrito",
+            icon: "success"
+          });
+    }
+
     const[productos, setProductos]=useState([]);
     const[loading, setLoading]=useState(true);
 
@@ -25,7 +31,7 @@ function Electronica()
         })
 
     },[])
-    
+
     return (
         <Container>
             <h1 className="text-center mt-4 mb-4 texto">Productos de Electronica</h1>
@@ -41,7 +47,7 @@ function Electronica()
     </div>
     <div className="d-flex justify-content-around align-items-end mt-auto align-items-baseline" style={{ height: '80px' }}>
       <Card.Text className="precio"><strong>${producto.price}</strong></Card.Text>
-      <Button variant="primary">Comprar</Button>
+      <Button onClick={comprarModal} variant="primary">Comprar</Button>
     </div>
   </Card.Body>
 </Card>

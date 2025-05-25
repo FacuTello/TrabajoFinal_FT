@@ -1,6 +1,7 @@
 import { Container, Card, Row, Col, Button } from "react-bootstrap";
 import { useState, useEffect } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import Swal from 'sweetalert2';
 
 
 
@@ -8,6 +9,14 @@ function RopaFemenina()
 {
     const[productos, setProductos]=useState([]);
     const[loading, setLoading]=useState(true);
+
+    function comprarModal(){
+      Swal.fire({
+          title: "Compra Realizada",
+          text: "Puedes ver tu compra en el carrito",
+          icon: "success"
+        });
+  }
 
     useEffect(()=>
     {
@@ -68,7 +77,7 @@ function RopaFemenina()
                     <Card.Text className="precio">
                       <strong>${producto.price}</strong>
                     </Card.Text>
-                    <Button variant="primary">Comprar</Button>
+                    <Button onClick={comprarModal} variant="primary">Comprar</Button>
                   </div>
                 </Card.Body>
               </Card>

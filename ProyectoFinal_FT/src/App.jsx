@@ -6,6 +6,7 @@ import RopaFemenina from './Components/RopaFemenina';
 import Electronica from './Components/Electronica';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import './App.css';
+import Administracion from './Components/Administracion';
 
 
 function App() {
@@ -21,6 +22,8 @@ function App() {
             <Route path="/Masculina" element={<RopaMasculina/>}/>
             <Route path="/Femenina" element={<RopaFemenina/>}/>
             <Route path="/Electronica" element={<Electronica/>}/>
+            <Route path="/login" element={<Administracion/>}/>
+
           </Routes>
         </div>
 

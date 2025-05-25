@@ -27,7 +27,7 @@ function Header()
             <Nav.Link as={Link} to="/Electronica" className='texto fs-5'>Electronica</Nav.Link>
           </div>
           <div className="d-flex ms-auto">
-            <Nav.Link href="#Administration" className=" texto me-4 fs-5">Administración</Nav.Link>
+            <Nav.Link as={Link} to="/login" className=" texto me-4 fs-5">Administración</Nav.Link>
             <Nav.Link href="#cart">
               <img
                 src="/Carrito.png"
