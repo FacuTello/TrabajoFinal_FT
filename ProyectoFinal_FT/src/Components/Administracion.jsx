@@ -1,12 +1,21 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {Form, Button, Container} from "react-bootstrap";
+import { useNavigate } from 'react-router-dom';
 
 
 function Administracion()
 {
+  
+const navigate = useNavigate();
+
+  const handleLogin = () => {
+    localStorage.setItem('auth', 'true');
+    navigate('/Usuario');
+  };
+
     return (
     <Container className='d-flex flex-column align-items-center' style={{width : '100%'}}>
-        <Form style={{width: '400px' }}>
+       <Form style={{ width: '400px' }}>
           <Form.Group className="mb-3 mt-5" controlId="formBasicEmail">
             <Form.Label><strong>Correo:</strong></Form.Label>
             <Form.Control type="email" placeholder="Ingrese su correo" />
@@ -22,7 +31,7 @@ function Administracion()
           <Form.Group className="mb-3" controlId="formBasicCheckbox">
             <Form.Check type="checkbox" label="Check me out" />
           </Form.Group>
-          <Button className='mt-2' variant="primary" type="submit">
+          <Button className='mt-2' variant="primary" type="submit" onClick={handleLogin}>
             Aceptar
           </Button>
         </Form>
