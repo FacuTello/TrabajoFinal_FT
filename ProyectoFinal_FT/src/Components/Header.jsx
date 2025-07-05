@@ -3,9 +3,14 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router-dom';
+import ModalCarrito from './ModalCarrito';
+import { useState } from 'react';
 
-function Header()
+function Header({ abrirModal }) 
 {
+
+  const [mostrarModal, setMostrarModal] = useState(false);
+
 
   const navigate = useNavigate();
   const isAuth = localStorage.getItem('auth') === 'true';
@@ -16,6 +21,7 @@ function Header()
   };
 
     return(
+       
       <Navbar bg="primary" data-bs-theme="dark">
       <Container>
         <Navbar.Brand href="#home">
@@ -42,7 +48,7 @@ function Header()
             <Nav.Link as={Link} to="/Joyeria" className="texto me-4 fs-5" onClick={cerrarSesion}>Cerrar Sesion</Nav.Link>
           </>
         )}
-            <Nav.Link href="#cart">
+            <Nav.Link onClick={abrirModal}>
               <img
                 src="/Carrito.png"
                 alt="Carrito de compras"
@@ -53,6 +59,12 @@ function Header()
           </div>
         </div>
       </Container>
+      { mostrarModal && (
+  <ModalCarrito 
+    mostrarModal={mostrarModal} 
+    cerrarModal={() => setMostrarModal(false)} 
+  />
+)}
     </Navbar>
     
         )
