@@ -1,42 +1,60 @@
-import 'bootstrap/dist/css/bootstrap.min.css';
-import {Form, Button, Container} from "react-bootstrap";
-import { useNavigate } from 'react-router-dom';
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+import { Form, Button, Container, Alert, Card } from "react-bootstrap";
+import { useAuth } from "../context/AuthContext";
 
-
-function Administracion()
+export default function Administracion() 
 {
-  
-const navigate = useNavigate();
+  const [user, setUser] = useState("");
+  const [pass, setPass] = useState("");
+  const [error, setError] = useState("");
+  const { login } = useAuth();
+  const navigate = useNavigate();
 
-  const handleLogin = () => {
-    localStorage.setItem('auth', 'true');
-    navigate('/Usuario');
+  const handleSubmit = (e) => 
+    {
+    e.preventDefault();
+    if (login(user, pass)) 
+      {
+      navigate("/Usuario");
+    } else {
+      setError("Usuario o contraseña inválidos");
+    }
   };
 
-    return (
-    <Container className='d-flex flex-column align-items-center' style={{width : '100%'}}>
-       <Form style={{ width: '400px' }}>
-          <Form.Group className="mb-3 mt-5" controlId="formBasicEmail">
-            <Form.Label><strong>Correo:</strong></Form.Label>
-            <Form.Control type="email" placeholder="Ingrese su correo" />
-            <Form.Text className="text-muted">
-              No compartiremos tu correo con nadie.
-            </Form.Text>
-          </Form.Group>
-    
-          <Form.Group className="mb-3" controlId="formBasicPassword">
-            <Form.Label><strong>Contraseña:</strong></Form.Label>
-            <Form.Control type="password" placeholder="Ingrese su contraseña" />
-          </Form.Group>
-          <Form.Group className="mb-3" controlId="formBasicCheckbox">
-            <Form.Check type="checkbox" label="Check me out" />
-          </Form.Group>
-          <Button className='mt-2' variant="primary" type="submit" onClick={handleLogin}>
-            Aceptar
-          </Button>
-        </Form>
-    </Container>
-      );
-}
+  return (
+    <Container className="d-flex justify-content-center align-items-center vh-100">
+      <Card style={{ width: "24rem" }}>
+        <Card.Body>
+          <Card.Title className="mb-4 text-center">Login</Card.Title>
+          {error && <Alert variant="danger">{error}</Alert>}
+          <Form onSubmit={handleSubmit}>
+            <Form.Group className="mb-3">
+              <Form.Label>Usuario</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="Ingrese usuario"
+                value={user}
+                onChange={(e) => setUser(e.target.value)}
+              />
+            </Form.Group>
 
-export default Administracion;
+            <Form.Group className="mb-3">
+              <Form.Label>Contraseña</Form.Label>
+              <Form.Control
+                type="password"
+                placeholder="Ingrese contraseña"
+                value={pass}
+                onChange={(e) => setPass(e.target.value)}
+              />
+            </Form.Group>
+
+            <Button variant="primary" type="submit" className="w-100">
+              Ingresar
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
+    </Container>
+  );
+}

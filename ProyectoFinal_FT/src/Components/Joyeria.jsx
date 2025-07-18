@@ -1,70 +1,106 @@
-import { Container, Card, Row, Col, Button } from "react-bootstrap";
-import { useState, useEffect, useContext } from 'react';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Swal from 'sweetalert2';
+import { useEffect, useState, useContext } from "react";
+import { Container, Row, Col, Card, Button } from "react-bootstrap";
+import Swal from "sweetalert2";
 import { CarritoContext } from "../context/CarritoContext";
-import ModalCarrito from "./ModalCarrito";
 
+function Joyeria() {
+  const [productos, setProductos] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { agregarProducto } = useContext(CarritoContext);
 
+  const Comprar = (producto) => {
+    agregarProducto(producto);
+    Swal.fire({
+      title: "Compra Realizada",
+      text: "Puedes ver tu compra en el carrito",
+      icon: "success",
+    });
+  };
 
-function Joyeria()
-{
+  useEffect(() => {
+    async function cargarProductos() {
+      try {
+        const [productosOriginales, productosNuevos] = await Promise.all([
+          fetch("https://fakestoreapi.com/products"),
+          fetch("https://6873f56bc75558e27355bf63.mockapi.io/api/products"),
+        ]);
 
-    const { agregarProducto } = useContext(CarritoContext);
+        const dataOriginales = await productosOriginales.json();
+        const dataNuevos = await productosNuevos.json();
 
-    const[productos, setProductos]=useState([]);
-    const[loading, setLoading]=useState(true);
+        const todosProductos = [...dataOriginales, ...dataNuevos];
 
-    function Comprar(producto){
-        agregarProducto(producto);
-        Swal.fire({
-            title: "Compra Realizada",
-            text: "Puedes ver tu compra en el carrito",
-            icon: "success"
-          });
+        const joyeria = todosProductos.filter(
+          (p) => p.category === "jewelery"
+        );
+        setProductos(joyeria);
+      } catch (error) {
+        console.error("Error cargando productos:", error);
+      } finally {
+        setLoading(false);
+      }
     }
 
-    useEffect(()=>
-    {
-        fetch('https://fakestoreapi.com/products')
-        .then(res=> res.json())
-        .then(data => {
-            const filtrados = data.filter(producto => producto.category === 'jewelery');
-            setProductos(filtrados);
-            setLoading(false);
-        })
-        .catch(err =>{
-            console.error("Error en la carga de la API");
-            setLoading(true);
-        })
+    cargarProductos();
+  }, []);
 
-    },[])
-    
-    return (
-        <Container>
-            <h1 className="text-center mt-4 mb-4 texto">Productos de Joyeria</h1>
-            <Row className="justify-content-center">
-                {productos.map(producto=>(    
-                    <Col md={4} className="mt-4" key={producto.id}>
-                        <Card className="d-flex flex-column text-center rounded card" style={{ width: '300px', height: '460px', border: '4px solid black' }}>
-  <Card.Img src={producto.image} style={{ width: '200px', height: '200px', margin: '0 auto', marginTop: '20px' }} />
-  <Card.Body className="d-flex flex-column">
-    <div>
-      <Card.Title>{producto.title}</Card.Title>
-      <Card.Text style={{whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis'}}>{producto.description}</Card.Text>
-    </div>
-    <div className="d-flex justify-content-around align-items-end mt-auto align-items-baseline" style={{ height: '80px' }}>
-      <Card.Text className="precio"><strong>${producto.price}</strong></Card.Text>
-      <Button onClick={() => Comprar(producto)} variant="primary">Comprar</Button>
-    </div>
-  </Card.Body>
-</Card>
+  if (loading) return <p className="text-center mt-4">Cargando...</p>;
 
-    </Col>
-    ))}
-            </Row>
-        </Container>
-    )
+  return (
+    <Container>
+      <h1 className="text-center mt-4 mb-4 texto">Productos de Joyería</h1>
+      <Row className="justify-content-center">
+        {productos.map((producto) => (
+          <Col key={producto.id} md={4} className="mt-4">
+            <Card
+              className="d-flex flex-column text-center rounded card"
+              style={{
+                width: "300px",
+                height: "460px",
+                border: "4px solid black",
+              }}
+            >
+              <Card.Img
+                src={producto.image}
+                style={{
+                  width: "200px",
+                  height: "200px",
+                  margin: "0 auto",
+                  marginTop: "20px",
+                  objectFit: "contain",
+                }}
+              />
+              <Card.Body className="d-flex flex-column">
+                <div>
+                  <Card.Title>{producto.title}</Card.Title>
+                  <Card.Text
+                    style={{
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
+                      textOverflow: "ellipsis",
+                    }}
+                  >
+                    {producto.description}
+                  </Card.Text>
+                </div>
+                <div
+                  className="d-flex justify-content-around align-items-end mt-auto"
+                  style={{ height: "80px" }}
+                >
+                  <Card.Text className="precio">
+                    <strong>${producto.price}</strong>
+                  </Card.Text>
+                  <Button variant="primary" onClick={() => Comprar(producto)}>
+                    Comprar
+                  </Button>
+                </div>
+              </Card.Body>
+            </Card>
+          </Col>
+        ))}
+      </Row>
+    </Container>
+  );
 }
 
 export default Joyeria;

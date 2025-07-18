@@ -2,73 +2,77 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import { Link } from 'react-router-dom';
-import { useNavigate } from 'react-router-dom';
-import ModalCarrito from './ModalCarrito';
-import { useState } from 'react';
+import { useAuth } from "../context/AuthContext";
+import { CarritoContext } from '../context/CarritoContext';
+import { useContext } from 'react';
 
-function Header({ abrirModal }) 
-{
+function Header({ abrirModal }) {
+  const { user, logout } = useAuth();
+  const { carrito } = useContext(CarritoContext);
 
-  const [mostrarModal, setMostrarModal] = useState(false);
-
-
-  const navigate = useNavigate();
-  const isAuth = localStorage.getItem('auth') === 'true';
-
-  const cerrarSesion = () => {
-    localStorage.removeItem('auth');
-    navigate('/Joyeria');
-  };
-
-    return(
-       
-      <Navbar bg="primary" data-bs-theme="dark">
+  return (
+    <Navbar bg="primary" data-bs-theme="dark" expand="md" className="py-2">
       <Container>
-        <Navbar.Brand href="#home">
+        <Navbar.Brand href="#home" className="d-flex align-items-center">
           <img
             src="./public/logo.png"
-            width="100"
-            height="100"
+            width="80"  
+            height="80"
             className="d-inline-block align-top"
             alt="Compumundo Hipermegared"
           />
         </Navbar.Brand>
-        <div className="d-flex w-100 align-items-center">
-          <div className="d-flex">
-            <Nav.Link as={Link} to="/Joyeria" className=" texto me-3 fs-5">Joyeria</Nav.Link>
-            <Nav.Link as={Link} to="/Masculina" className=" texto me-3 fs-5">Ropa Masculina</Nav.Link>
-            <Nav.Link as={Link} to="/Femenina" className='texto me-3 fs-5'>Ropa Femenina</Nav.Link>
-            <Nav.Link as={Link} to="/Electronica" className='texto fs-5'>Electronica</Nav.Link>
-          </div>
-          <div className="d-flex ms-auto">
-            <Nav.Link as={Link} to="/login" className=" texto me-4 fs-5">Administración</Nav.Link>
-            {isAuth && (
-          <>
-            <Nav.Link as={Link} to="/Agregar" className="texto me-4 fs-5">Agregar</Nav.Link>
-            <Nav.Link as={Link} to="/Joyeria" className="texto me-4 fs-5" onClick={cerrarSesion}>Cerrar Sesion</Nav.Link>
-          </>
-        )}
-            <Nav.Link onClick={abrirModal}>
-              <img
-                src="/Carrito.png"
-                alt="Carrito de compras"
-                width="30"
-                height="30"
-              />
-            </Nav.Link>
-          </div>
-        </div>
-      </Container>
-      { mostrarModal && (
-  <ModalCarrito 
-    mostrarModal={mostrarModal} 
-    cerrarModal={() => setMostrarModal(false)} 
+
+        {/* Botón hamburguesa para collapsar en móviles */}
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+
+        {/* Contenido que se colapsa en móviles */}
+        <Navbar.Collapse id="basic-navbar-nav">
+          <Nav className="me-auto my-2 my-md-0 fs-5">
+            <Nav.Link as={Link} to="/Joyeria" className="texto">Joyería</Nav.Link>
+            <Nav.Link as={Link} to="/Masculina" className="texto">Ropa Masculina</Nav.Link>
+            <Nav.Link as={Link} to="/Femenina" className="texto">Ropa Femenina</Nav.Link>
+            <Nav.Link as={Link} to="/Electronica" className="texto">Electrónica</Nav.Link>
+          </Nav>
+
+          {/* Separamos con ms-auto para que este contenido quede a la derecha */}
+          <Nav className="ms-auto align-items-center fs-5">
+            {!user && (
+              <Nav.Link as={Link} to="/login" className="texto me-3">
+                Login
+              </Nav.Link>
+            )}
+
+            {user && (
+              <>
+                <Nav.Link as={Link} to="/Agregar" className="texto me-3">Agregar</Nav.Link>
+                <Nav.Link onClick={logout} className="texto me-3">Cerrar sesión</Nav.Link>
+              </>
+            )}
+
+<Nav.Link onClick={abrirModal} className="position-relative d-flex align-items-center">
+  <img
+    src="/Carrito.png"
+    alt="Carrito de compras"
+    width="30"
+    height="30"
   />
-)}
+  {carrito.length > 0 && (
+    <span
+      className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+      style={{ fontSize: "0.7rem" }}
+    >
+      {carrito.length}
+    </span>
+  )}
+</Nav.Link>
+          </Nav>
+        </Navbar.Collapse>
+      </Container>
     </Navbar>
-    
-        )
+  );
 }
 
 export default Header;
+
 

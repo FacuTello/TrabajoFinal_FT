@@ -4,31 +4,31 @@ import Joyeria from './Components/Joyeria';
 import RopaMasculina from './Components/RopaMasculina';
 import RopaFemenina from './Components/RopaFemenina';
 import Electronica from './Components/Electronica';
-import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
-import './App.css';
 import Administracion from './Components/Administracion';
 import Agregar from './Components/Agregar';
-import RutaProtegida from './Components/RutaProtegida';
 import Usuario from './Components/Usuario';
 import ModalCarrito from './Components/ModalCarrito';
+import RutaProtegida from './Components/RutaProtegida'; 
+
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
+
 import { CarritoProvider } from './context/CarritoContext';
+import { AuthProvider } from './context/AuthContext';
 
 
 function App() {
   const [mostrarModal, setMostrarModal] = useState(false);
 
   return (
-    <div>
-       <CarritoProvider>
-      <Router>
-        <div>
+    <AuthProvider>
+      <CarritoProvider>
+        <Router>
           <Header abrirModal={() => setMostrarModal(true)} />
           <ModalCarrito
             mostrarModal={mostrarModal}
             cerrarModal={() => setMostrarModal(false)}
           />
-
           <Routes>
             <Route path="/Joyeria" element={<Joyeria />} />
             <Route path="/Masculina" element={<RopaMasculina />} />
@@ -52,11 +52,11 @@ function App() {
               }
             />
           </Routes>
-        </div>
-      </Router>
+        </Router>
       </CarritoProvider>
-    </div>
-    );
-  }
+    </AuthProvider>
+  );
+}
 
-export default App
+export default App;
+
