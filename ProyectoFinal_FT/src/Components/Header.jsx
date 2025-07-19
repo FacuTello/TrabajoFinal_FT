@@ -23,10 +23,9 @@ function Header({ abrirModal }) {
           />
         </Navbar.Brand>
 
-        {/* Botón hamburguesa para collapsar en móviles */}
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
 
-        {/* Contenido que se colapsa en móviles */}
+      
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="me-auto my-2 my-md-0 fs-5">
             <Nav.Link as={Link} to="/Joyeria" className="texto">Joyería</Nav.Link>
@@ -35,7 +34,7 @@ function Header({ abrirModal }) {
             <Nav.Link as={Link} to="/Electronica" className="texto">Electrónica</Nav.Link>
           </Nav>
 
-          {/* Separamos con ms-auto para que este contenido quede a la derecha */}
+        
           <Nav className="ms-auto align-items-center fs-5">
             {!user && (
               <Nav.Link as={Link} to="/login" className="texto me-3">
@@ -50,26 +49,26 @@ function Header({ abrirModal }) {
               </>
             )}
 
-<Nav.Link onClick={abrirModal} className="position-relative d-flex align-items-center">
-  <img
-    src="/Carrito.png"
-    alt="Carrito de compras"
-    width="30"
-    height="30"
-  />
-  {carrito.length > 0 && (
-    <span
-      className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
-      style={{ fontSize: "0.7rem" }}
-    >
-      {carrito.length}
-    </span>
-  )}
-</Nav.Link>
-          </Nav>
-        </Navbar.Collapse>
-      </Container>
-    </Navbar>
+            <Nav.Link onClick={abrirModal} className="position-relative d-flex align-items-center">
+                  <img
+                    src="/Carrito.png"
+                    alt="Carrito de compras"
+                    width="30"
+                    height="30"
+                  />
+                  {carrito.length > 0 && (
+                    <span
+                      className="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger"
+                      style={{ fontSize: "0.7rem" }}
+                    >
+                      {carrito.length}
+                    </span>
+                  )}
+                </Nav.Link>
+                          </Nav>
+                        </Navbar.Collapse>
+                      </Container>
+                    </Navbar>
   );
 }
 
