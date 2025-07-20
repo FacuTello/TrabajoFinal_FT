@@ -13,9 +13,9 @@ function Header({ abrirModal }) {
   return (
     <Navbar bg="primary" data-bs-theme="dark" expand="md" className="py-2">
       <Container>
-        <Navbar.Brand href="#home" className="d-flex align-items-center">
+        <Navbar.Brand className="d-flex align-items-center">
           <img
-            src="./public/logo.png"
+            src="./public/Logo.png"
             width="80"  
             height="80"
             className="d-inline-block align-top"
