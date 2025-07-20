@@ -4,6 +4,7 @@ import Joyeria from './Components/Joyeria';
 import RopaMasculina from './Components/RopaMasculina';
 import RopaFemenina from './Components/RopaFemenina';
 import Electronica from './Components/Electronica';
+import Footer from './Components/Footer';
 import Administracion from './Components/Administracion';
 import Agregar from './Components/Agregar';
 import Usuario from './Components/Usuario';
