@@ -10,6 +10,7 @@ import Agregar from './Components/Agregar';
 import Usuario from './Components/Usuario';
 import ModalCarrito from './Components/ModalCarrito';
 import RutaProtegida from './Components/RutaProtegida'; 
+import { Navigate } from "react-router-dom";
 
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { useState } from 'react';
