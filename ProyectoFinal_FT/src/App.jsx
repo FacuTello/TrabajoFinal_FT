@@ -31,6 +31,7 @@ function App() {
             cerrarModal={() => setMostrarModal(false)}
           />
           <Routes>
+            <Route path="/" element={<Navigate to="/Joyeria" />} />
             <Route path="/Joyeria" element={<Joyeria />} />
             <Route path="/Masculina" element={<RopaMasculina />} />
             <Route path="/Femenina" element={<RopaFemenina />} />
