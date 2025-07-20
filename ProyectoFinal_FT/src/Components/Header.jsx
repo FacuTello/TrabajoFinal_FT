@@ -15,7 +15,7 @@ function Header({ abrirModal }) {
       <Container>
         <Navbar.Brand className="d-flex align-items-center">
           <img
-            src="./public/Logo.png"
+            src="https://i.ibb.co/LDDrc3cW/Logo.png"
             width="80"  
             height="80"
             className="d-inline-block align-top"
